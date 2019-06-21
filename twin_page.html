@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+	</script>
+	<script src="script.js">
+	</script>
+</head>
+
+<body>
+<!-- The #each helper iterates over an array of items. -->
+<script id="example-template222" type="text/x-handlebars-template">
+    {{menu_name}}
+    <!-- people is looked up on the global context, the one we pass to the compiled template -->
+  
+    {{#each pe}}
+
+      <!-- Here the context is each individual person. So we can access its properties directly: -->
+      <p>{{menu_name}} {{part_menu}}</p>
+
+    {{/each}}
+  </script>
+  
+</body>
+
+</html>

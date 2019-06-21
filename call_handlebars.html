@@ -1,0 +1,30 @@
+
+{% raw %}
+<script id="example-template" type="text/x-handlebars-template">
+        {{#each people}}
+            {{#if status}}
+                <li><a href="{{part_menu}}.html" class="js-search" data-close="true">
+                    <div class="demo-google-material-icon">  <span class="icon-name">{{menu_name}}</span> </div></a>
+                </li>
+            {{/if}}
+        {{/each}}
+</script>
+
+<script id="content_tem" type="text/x-handlebars-template">
+    {{#each content}}
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        {{title}} <small>{{create_time}}</small>
+                    </h2>
+                </div>
+                <div class="body">
+                        {{detail}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+</script>
+
+{% raw %}

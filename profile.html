@@ -1,0 +1,72 @@
+<link href="header.html" rel="import" />
+
+<!-- The #each helper iterates over an array of items. -->
+<div class="container-fluid " >
+
+    <nav class="navbar">
+        <div class="container-fluid"  style="background: #333;">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars" style="display: block;"></a>
+                <a class="navbar-brand" href="index.html">handlebars</a>
+            </div>
+    
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right menu_callbacks">
+                </ul>
+                <div class="navbar-header" style="float: right;">
+                    <div class="row clearfix profile_call_token">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    </div>
+
+<section class="content">
+    <div class="row clearfix show_profile_detail" >
+    </div>
+</section>
+
+
+<script id="profile_call_token_sc" type="text/x-handlebars-template">
+    <div class="demo-google-material-icon"> 
+        <span class="icon-name navbar-brand" style="color: #337ab7;">
+          Profile  {{username}}  ||
+        </span>
+    </div>
+</script>
+
+
+<script id="example-template" type="text/x-handlebars-template">
+            {{#each people}}
+                {{#if status}}
+                    <li><a href="{{part_menu}}.html" class="js-search" data-close="true">
+                        <div class="demo-google-material-icon">  <span class="icon-name">{{menu_name}}</span> </div></a>
+                    </li>
+                {{/if}}
+            {{/each}}
+
+</script>
+<script id="profie_detail_usejwt" type="text/x-handlebars-template">
+    <div class="card profile-card">
+        <div class="profile-header">&nbsp;</div>
+            <div class="profile-body">
+                <div class="image-area">
+                    <img src="/mvc_slim/src/templates/img{{img_part}}" alt="AdminBSB - Profile Image">
+                </div>
+                <div class="content-area">
+                    <h3>{{username}}</h3>
+                    <p>{{nickname}}</p>
+                    <p>{{email}}</p>
+                    <p>{{tell}}</p>
+                </div>
+            </div>
+            <div class="profile-footer">
+            </div>
+    </div>
+</script>
+
+
+<link href="footer.html" rel="import" />
