@@ -8,17 +8,7 @@
 
        <!-- เช็ค recaptcha -->
        <script src="//www.google.com/recaptcha/api.js?render=6LcDTKoUAAAAAARTjiGhrp8zrhIVWNDyqYy_ahVE"></script>
-       <script>
-         grecaptcha.ready(function() {
-             grecaptcha.execute('6LcDTKoUAAAAAARTjiGhrp8zrhIVWNDyqYy_ahVE', {action: 'login'}).then(function(token) {
-                 // ค่า token ที่ถูกส่งกลับมา จะถูกนำไปใช้ส่งไปตรวจสอบกับ api อีกครั้ง
-                 // เราเอาค่า token ไปไว้ใน input hidden ชื่อg-recaptcha-response
-                //    console.log(token);
-                   document.getElementById('g-recaptcha-response').value = token;
-                 // makeaction(); // ทำฟังก์ชั่นเพิ่มเติม ถ้ามี
-             });
-         });
-       </script>  
+       
         <!-- เช็ค recaptcha -->
 <body class="login-page">
 
