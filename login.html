@@ -5,6 +5,21 @@
 }
 
 </style>
+
+       <!-- เช็ค recaptcha -->
+       <script src="//www.google.com/recaptcha/api.js?render=6LcDTKoUAAAAAARTjiGhrp8zrhIVWNDyqYy_ahVE"></script>
+       <script>
+         grecaptcha.ready(function() {
+             grecaptcha.execute('6LcDTKoUAAAAAARTjiGhrp8zrhIVWNDyqYy_ahVE', {action: 'login'}).then(function(token) {
+                 // ค่า token ที่ถูกส่งกลับมา จะถูกนำไปใช้ส่งไปตรวจสอบกับ api อีกครั้ง
+                 // เราเอาค่า token ไปไว้ใน input hidden ชื่อg-recaptcha-response
+                //    console.log(token);
+                   document.getElementById('g-recaptcha-response').value = token;
+                 // makeaction(); // ทำฟังก์ชั่นเพิ่มเติม ถ้ามี
+             });
+         });
+       </script>  
+        <!-- เช็ค recaptcha -->
 <body class="login-page">
 
     <div class="login-box">
@@ -14,6 +29,9 @@
         <div class="card">
             <div class="body">
                 <form id="sign_in"  method="post" >
+                    <!-- เช็ค recaptcha -->
+                    <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response" value="">
+                    <!-- เช็ค recaptcha -->
                     <div class="msg"></div>
                     <div class="input-group">
                         <span class="input-group-addon">

@@ -47,14 +47,17 @@
                     </li>
                 {{/if}}
             {{/each}}
-
+            <li><a href="login.html" class="js-search" data-close="true" onclick="document.cookie='json_data=;expires=Wed; 01 Jan 1970'">
+                    <div class="demo-google-material-icon">  <span class="icon-name" >Logout</span> </div></a>
+                </li>
 </script>
+
 <script id="profie_detail_usejwt" type="text/x-handlebars-template">
-    <div class="card profile-card">
+    <div class="card profile-card" style="margin: 0 200px;">
         <div class="profile-header">&nbsp;</div>
             <div class="profile-body">
                 <div class="image-area">
-                    <img src="/mvc_slim/src/templates/img{{img_part}}" alt="AdminBSB - Profile Image">
+                    <img src="/mvc_slim/src/templates/img/{{img_part}}" alt="AdminBSB - Profile Image">
                 </div>
                 <div class="content-area">
                     <h3>{{username}}</h3>

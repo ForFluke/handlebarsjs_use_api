@@ -2,12 +2,14 @@
 function check_login() {
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
+  var g_recaptcha_response = document.getElementById("g-recaptcha-response").value;
 
   $.ajax({
       type: "POST",
       url: "/mvc_slim/public/check_login_client",
-      data: { username: username, password: password},
+      data: { username: username, password: password,g_recaptcha_response: g_recaptcha_response,},
       success: function(html){
+        // console.log(html);
           var Obj = JSON.parse(html);
           var json_data = Array;
           if(Obj.status_login == false){
@@ -24,6 +26,43 @@ function check_login() {
   });
 }
 
+  function clear_cookie_all(){
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+       
+    }
+  }
+
+$( document ).ready(function() {
+  if(getCookie('json_data') == "''" || getCookie('json_data') == '' ){
+    document.cookie = "json_data='set'";
+    window.location.href = "login.html";
+  }else{
+    // console.log(document.cookie);
+  }
+});
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -35,11 +74,15 @@ function parseJwt (token) {
 };
 
 $(function () {
+
+
     var data_json = parseJwt(document.cookie);
 
-    main_call_data_jwt(data_json);
+    // main_call_data_jwt(data_json);
     // show_profile_detail(data_json);
-    
+
+    // var data_json_profile = parseJwt(document.cookie);
+
     var context = {
         "city": "London",
         "street": "Baker Street",
@@ -58,17 +101,24 @@ $(function () {
             content_callbacks(context);
             content_callbacks_full(context);
       });
+      
+   main_call_data_jwt(data_json);
+
+    show_profile_detail(data_json);
 
     function main_call_data_jwt(data_json){
-        console.log(data_json);
+        // console.log(data_json);
+        $(".profile_call_token").empty();
         var theTemplateScript = $("#profile_call_token_sc").html(); /// อ้างอิงว่าจะชี้ไปที่ script ตัวไหนในหน้า html
         var theTemplate = Handlebars.compile(theTemplateScript); 
         var theCompiledHtml = theTemplate(data_json);
         $('.profile_call_token').append(theCompiledHtml);  // อ้างอิงว่าจะสร้าง append ที่ใด id หรือ class ชื่ออะไร
+        
       }
 
     function menu_callbacks(data){
       // console.log(data);
+      $(".menu_callbacks").empty();
       var theTemplateScript = $("#example-template").html(); /// อ้างอิงว่าจะชี้ไปที่ script ตัวไหนในหน้า html
       var theTemplate = Handlebars.compile(theTemplateScript); 
       var theCompiledHtml = theTemplate(data);
@@ -76,6 +126,7 @@ $(function () {
     }
     
     function content_callbacks(data){
+      $(".content_callbacks").empty();
       // console.log(data);
       var theTemplateScript = $("#content_tem").html(); /// อ้างอิงว่าจะชี้ไปที่ script ตัวไหนในหน้า html
       var theTemplate = Handlebars.compile(theTemplateScript); 
@@ -85,6 +136,7 @@ $(function () {
 
     function content_callbacks_full(data){
       // console.log(data);
+      $(".model_show_detail").empty();
       var theTemplateScript = $("#content_tem_full").html(); /// อ้างอิงว่าจะชี้ไปที่ script ตัวไหนในหน้า html
       var theTemplate = Handlebars.compile(theTemplateScript); 
       var theCompiledHtml = theTemplate(data);
@@ -92,11 +144,11 @@ $(function () {
     }  
 
     function show_profile_detail(data_json){
-      // console.log(data);
-      var theTemplateScript = $("#profie_detail_usejwt").html(); /// อ้างอิงว่าจะชี้ไปที่ script ตัวไหนในหน้า html
-      var theTemplate = Handlebars.compile(theTemplateScript); 
-      var theCompiledHtml = theTemplate(data_json);
-      $('.show_profile_detail').append(theCompiledHtml);  // อ้างอิงว่าจะสร้าง append ที่ใด id หรือ class ชื่ออะไร
+      $(".show_profile_detail").empty();
+      var theTemplateScript_profile = $("#profie_detail_usejwt").html(); /// อ้างอิงว่าจะชี้ไปที่ script ตัวไหนในหน้า html
+      var theTemplate_profile = Handlebars.compile(theTemplateScript_profile); 
+      var theCompiledHtml_profile = theTemplate_profile(data_json);
+      $('.show_profile_detail').append(theCompiledHtml_profile);  // อ้างอิงว่าจะสร้าง append ที่ใด id หรือ class ชื่ออะไร
     }
     
   });
