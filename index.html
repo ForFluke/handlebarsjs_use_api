@@ -40,11 +40,20 @@
 <!-- {% raw %} -->
     <script id="example-template" type="text/x-handlebars-template">
             {{#each people}}
-                {{#if status}}
+
+                    {{#ifCond status '==' 1}}
+                    <li><a href="{{part_menu}}.html" >
+                            <div class="demo-google-material-icon">  <span class="icon-name">{{menu_name}}</span> </div></a>
+                        </li>
+                    {{else}}
+                   
+                    {{/ifCond}}
+
+                <!-- {{#if status}}
                     <li><a href="{{part_menu}}.html" >
                         <div class="demo-google-material-icon">  <span class="icon-name">{{menu_name}}</span> </div></a>
                     </li>
-                {{/if}}
+                {{/if}} -->
             {{/each}}
             <li><a href="login.html"  onclick="document.cookie='json_data=;expires=Wed; 01 Jan 1970'">
                 <div class="demo-google-material-icon">  <span class="icon-name" >Logout</span> </div></a>
@@ -101,3 +110,8 @@
 <!-- {% raw %} -->
 
   <link href="footer.html" rel="import" />
+<script>
+        $(function () {
+            getcontent();
+        });
+</script>
